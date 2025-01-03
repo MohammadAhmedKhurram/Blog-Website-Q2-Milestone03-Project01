@@ -11,6 +11,14 @@ const getData = async () => {
   return res;
 };
 
+interface Blog {
+  id: string;
+  title: string;
+  slug: { current: string };
+  subheading: string;
+  publishedAt: string;
+}
+
 export default async function BlogDetail({
   params,
 }: {
@@ -18,7 +26,7 @@ export default async function BlogDetail({
 }) {
   const blogs = await getData();
   const selectedBlog = blogs.find(
-    (blog: any) => blog.slug.current === params.slug
+    (blog: Blog) => blog.slug.current === params.slug
   );
   if (!selectedBlog) {
     return <div className="text-center py-20">Blog not found.</div>;

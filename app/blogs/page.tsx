@@ -13,6 +13,15 @@ const getData = async () => {
   return res;
 };
 
+interface Blog {
+  id: string;
+  title: string;
+  slug: { current: string };
+  subheading: string;
+  publishedAt: string;
+}
+
+
 export default async function BlogListing() {
   const data = await getData();
 
@@ -23,7 +32,7 @@ export default async function BlogListing() {
           Latest Blog Posts
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data.map((blog: any) => (
+          {data.map((blog: Blog) => (
             <div key={blog.id} className="bg-white shadow-lg rounded-lg p-6">
               <h3 className="text-2xl font-semibold text-teal-500">
                 {blog.title}
